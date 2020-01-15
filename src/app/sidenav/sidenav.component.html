@@ -1,0 +1,68 @@
+<ion-menu contentId="content1" side="start">
+    <ion-header>
+      <ion-toolbar color="primary"></ion-toolbar>
+      <div class="ion-text-center">
+        <ion-item text-center lines="none"> 
+          <ion-label style="margin-top: 10px"><h2><b>Zalogowany jako:</b></h2></ion-label>
+        </ion-item>
+        <ion-avatar style="margin: 8px auto">
+          <img src="assets/user.png">
+        </ion-avatar>
+        <p>{{ loggedInUserEmail }}</p>
+      </div>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item [routerLink]="['./delivery/new']" (click)="routeClickCloseMenu()">
+          <ion-icon name="qr-scanner"></ion-icon>
+          <ion-label margin>
+             <b>Przyjmij Nową Dostawę</b>
+          </ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['./delivery/history']" (click)="routeClickCloseMenu()">
+          <ion-icon name="archive"></ion-icon>
+          <ion-label margin>
+            <b>Historia Przyjęć</b>
+          </ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['./barcodes/personal']" (click)="routeClickCloseMenu()">
+          <ion-icon name="folder-open"></ion-icon>
+          <ion-label margin>
+            <b>Zapisane Kody Kreskowe</b>
+          </ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['./barcodes/indirect']" (click)="routeClickCloseMenu()">
+          <ion-icon name="barcode"></ion-icon>
+          <ion-label margin>
+            <b>Kody Indirect</b>
+          </ion-label>
+        </ion-item>
+        <ion-item [routerLink]="['./barcodes/generator']" (click)="routeClickCloseMenu()">
+          <ion-icon name="contract"></ion-icon>
+          <ion-label margin>
+            <b>Generator Kodów</b>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="cart"></ion-icon>
+          <ion-label margin>
+            <b>Putaway Counter</b>
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="onLogOut(); routeClickCloseMenu()">
+          <ion-icon name="log-out"></ion-icon>
+          <ion-label margin>
+            <b>Wyloguj</b>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-item lines="none" text-center style="margin-bottom: -15px">
+        <ion-label><b><i>Made by: Andrzej Bronisławski</i></b></ion-label>
+      </ion-item>
+      <ion-item lines="none" text-center style="margin-top: -5px">
+        <ion-label><b>v 0.1 </b>(PRE-RELEASE)</ion-label>
+      </ion-item>
+    </ion-footer>
+  </ion-menu>

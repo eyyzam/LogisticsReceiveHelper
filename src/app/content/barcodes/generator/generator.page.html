@@ -1,0 +1,17 @@
+<ion-content style="--padding-top:65px">
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-item class="ion-margin">
+          <ion-input type="text" placeholder="Type Barcode Here" #barcode></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center" margin>
+        <qr-code [value]="barcode.value" [size]="250" *ngIf="barcode.value !== undefined && barcode.value !== ''"></qr-code>
+        <h3 class="alignCenter">{{ barcode.value }}</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

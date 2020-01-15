@@ -1,0 +1,28 @@
+ion-list-header, .ion-list-header {
+ text-align: center !important;
+}
+
+ngx-barcode {
+    margin: auto; 
+    padding: 0; 
+    border: 0;
+    overflow: visible;
+}
+
+ion-select {
+    border: solid 1px;
+}
+
+.alignCenter {
+    margin: 0 0 16px 0;
+    text-align: center;
+    font: 20px monospace;
+}
+
+.barcodeRow {
+    margin-top: 10px;
+}
+
+ion-fab {
+    margin-bottom : 50px;
+}

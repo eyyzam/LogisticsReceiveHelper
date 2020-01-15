@@ -1,0 +1,11 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false" [disabled]="!loggedIn"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <app-sidenav></app-sidenav>
+  <ion-router-outlet id="content1" main></ion-router-outlet>
+</ion-app>

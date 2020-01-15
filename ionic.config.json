@@ -1,0 +1,8 @@
+{
+  "name": "DHL_Receive_Helper",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

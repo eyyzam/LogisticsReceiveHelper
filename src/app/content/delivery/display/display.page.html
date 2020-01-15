@@ -1,0 +1,123 @@
+<ion-content style="--padding-top:65px; --background: #FFFFFF">
+    <div text-center margin *ngIf="isLoading">
+      <ion-spinner color="primary"></ion-spinner>
+      <ion-text>
+        <p>Data is loading...</p>
+      </ion-text>
+    </div>
+    <div *ngIf="!isLoading"> 
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-text>
+                <h2 class="ion-margin"><b>Dashboard</b></h2>
+                <h5 class="ion-margin"><b>[ {{ ASN.ASN }} ]</b></h5>
+              </ion-text>
+              <ion-fab vertical="top" horizontal="end">
+                <ion-fab-button (click)="Options()" color="light" >
+                  <ion-icon name="options" color="primary"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+              <ion-fab vertical="top" horizontal="end" style="margin-right: 75px">
+                  <ion-fab-button (click)="PalletAssignments()" color="light">
+                      <ion-icon name="add" color="primary"></ion-icon>
+                    </ion-fab-button>
+              </ion-fab>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       
+      <ion-card *ngIf="PalletsAssignmentsVisible && PalletsArray.length !== 0">
+        <ion-card-header no-border>
+          <ion-card-subtitle>
+            <ion-item lines="none">
+              <ion-icon name="albums" color="primary" slot="start"></ion-icon>
+              <ion-label><b>Assigned Pallets</b></ion-label>
+            </ion-item>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div text-center *ngIf="PalletsArray.length === 0">
+            <h3>No pallets</h3>
+          </div>
+          <ion-list lines="none" *ngIf="PalletsArray.length > 0">
+            <ion-item *ngFor="let pallet of PalletsArray; let i = index;">
+              <h1 style="margin: auto 5px auto 7px"> #{{ i+1 }} </h1>
+              <ion-label margin> 
+                <h2 margin><b><i>{{ pallet.TCValue  }}</i></b></h2> 
+                <p margin>
+                  [K: {{ pallet.TCK }} 
+                    IN: {{ pallet.TCIN }}]
+                </p>
+              </ion-label>
+              <ion-icon (click)="onPalletDelete(i, pallet.key)" name="trash" color="danger"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="ASN.TCs" class="ion-margin" style="box-shadow: none !important">
+        <ion-card-content class="ion-no-padding">
+          <ion-list lines="none" class="ion-margin ion-no-padding">
+            <ion-item *ngFor="let TC of TCSumArray; let i = index">
+              <ion-avatar>
+                <ion-img src="assets/parcel.png"></ion-img>
+              </ion-avatar>
+              <ion-label margin>
+                
+                <h2 margin><b><i>{{ TC.TCValue }}</i></b></h2>
+                <ion-progress-bar 
+                  *ngIf="TC.Limit !== 'unset'"
+                  [value]="progressBarValueCalculator(TC.TCTotalIN, TC.Limit)" 
+                  [color]="determineColor(TC.TCTotalIN, TC.Limit)">
+                </ion-progress-bar>
+                <p margin>
+                  <b>K:</b> {{ TC.TCTotalK}}
+                  &nbsp;<b>IN:</b> {{ TC.TCTotalIN }}
+                  <i *ngIf="TC.Limit !== 'unset'">of: {{ TC.Limit }}</i>
+                </p>
+                
+              </ion-label>
+              <h1 style="min-width: 30px" text-center>{{ TC.TCPalletsTotal }}</h1>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="!ASN.TCs">
+        <ion-card-header>
+          <ion-card-subtitle>
+            <ion-item lines="none">
+              <ion-icon name="remove-circle-outline" color="danger" slot="start"></ion-icon>
+              <ion-label><b>No TCs Assigned yet!</b></ion-label>
+            </ion-item>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" offset="4">
+                <ion-button fill="clear" (click)="redirectToTCManagmentPanel(userId, ASNDatabaseID)">
+                  <ion-icon name="add" slot="start"></ion-icon>
+                  <ion-label>Add TCs</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+  <ion-footer *ngIf="footerVisible">
+    <ion-toolbar>
+      <ion-title><h2>Podsumowanie</h2></ion-title>
+      <ion-item style="margin-left: 24px" lines="none">
+        <ion-text>
+          Kartony: {{ ASNAbsoluteTotalK }}
+        </ion-text>
+      </ion-item>
+      <ion-item style="margin-left: 24px" lines="none">
+        <ion-text>
+          Palety: {{ ASNAbsoluteTotalP }}
+        </ion-text>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer>

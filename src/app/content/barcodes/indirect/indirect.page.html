@@ -1,0 +1,20 @@
+<ion-content style="--padding-top:65px">
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-select class="barcodeSelect" interface="popover" class="ion-text-wrap" margin #select placeholder="Select Barcode">
+          <ion-select-option *ngFor="let barcode of indirectBarcodes" [value]="barcode.barcodeValue">{{ barcode.barcodeDisplayValue }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-margin ion-no-padding" class="barcodeRow">
+      <ion-col class="ion-text-center ion-no-margin ion-no-padding" size="12">
+        <div>
+          <!-- <ngx-barcode [bc-value]="select.value" [bc-display-value]="true" bc-format="CODE128" *ngIf="select.value !== undefined && select.value.length < 11"></ngx-barcode> -->
+          <qr-code [value]="select.value" [size]="250" *ngIf="select.value !== undefined"></qr-code>
+          <h3 class="alignCenter">{{ select.value }}</h3>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

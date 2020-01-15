@@ -1,0 +1,58 @@
+<ion-content style="--padding-top:65px; --background: #FFFFFF">
+  <ion-item lines="none">
+    <ion-button color="primary" fill="outline" (click)="redirectBack()">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      <ion-label>Wróć</ion-label>
+    </ion-button>
+    </ion-item>
+  <div *ngIf="!isLoading">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <h2 class="ion-margin"><b>Limity</b></h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div *ngFor="let TC of showTCs; let i = index">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item lines="none">
+                    <ion-avatar>
+                      <ion-img src="assets/parcel.png"></ion-img>
+                    </ion-avatar>
+                    <ion-label margin><h2 margin><b><i>{{ TC.TCValue }}</i></b></h2></ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="8">
+                  <ion-item>
+                    <ion-label position="floating">Ilość Innerów</ion-label>
+                    <ion-input type="number" name="limit" required [(ngModel)]="TC.Limit" #Limit></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-item lines="none"> 
+                    <!-- <ion-button expand="block" fill="none"> -->
+                      <ion-icon name="checkmark" color="success" (click)="UpdateLimit(TC.key, Limit.value, TC.TCValue)"></ion-icon>
+                    <!-- </ion-button> -->
+                  </ion-item>
+                  
+                </ion-col>
+                <ion-col size="2">
+                  <ion-item lines="none">
+                    <!-- <ion-button expand="block" fill="none"> -->
+                      <ion-icon name="trash" color="danger" (click)="RemoveLimit(TC.key, TC.TCValue)"></ion-icon>
+                    <!-- </ion-button> -->
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

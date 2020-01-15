@@ -1,0 +1,134 @@
+<ion-content style="--padding-top:65px">
+  <ion-item lines="none">
+    <ion-button color="primary" fill="outline" (click)="redirectBack()">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      <ion-label>Go Back</ion-label>
+    </ion-button>
+  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-item lines="none">
+          <ion-icon name="add-circle-outline" color="primary" slot="start"></ion-icon>
+          <ion-label><b>New TC</b></ion-label>
+        </ion-item>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form #newTCForm="ngForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">TC</ion-label>
+                <ion-input type="text" ngModel name="TCValue" required #TCValueControl="ngModel"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Width</ion-label>
+                <ion-input type="number" ngModel name="Width" required #WidthControl="ngModel"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Height</ion-label>
+                <ion-input type="number" ngModel name="Height" required #HeightControl="ngModel"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Inners</ion-label>
+                <ion-input type="number" ngModel name="Inners" required #InnersControl="ngModel"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Limit</ion-label>
+                <ion-input type="text" ngModel name="limit" #limitControl="ngModel" value="10000" [disabled]="cd.checked" #be></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6"> 
+              <ion-item lines="none" style="margin: 8px">
+                <ion-label>Łączony</ion-label>
+                <ion-checkbox color="primary" ngModel name="limitDisable" checked="false" #limitDisableControl="ngModel" #cd (click)="cd.checked ? be.value = null: showVal(be.value)"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row margin>
+            <ion-col size="4" offset="4">
+              <ion-button fill="outline" expand="block" (click)="addTCAssignment(newTCForm)">
+                <ion-label>Add</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-item lines="none">
+          <ion-icon name="document" color="primary" slot="start"></ion-icon>
+          <ion-label><b>Assigned TCs</b></ion-label>
+        </ion-item>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngFor="let TC of showTCs">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-avatar>
+                  <ion-img src="assets/product-icon.png"></ion-img>
+                </ion-avatar>
+                <ion-label margin><h2 margin><b><i>{{ TC.TCValue }}</i></b></h2></ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Width</ion-label>
+                <ion-input type="number" name="Width" required [(ngModel)]="TC.Width" #TCWidth></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Height</ion-label>
+                <ion-input type="number" name="Height" required [(ngModel)]="TC.Height" #TCHeight></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">Inners</ion-label>
+                <ion-input type="number" name="Inners" required [(ngModel)]="TC.Inners" #TCInners></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button fill="clear" expand="block" (click)="updateTC(TC.key, TC.TCValue, TCWidth.value, TCHeight.value, TCInners.value)">
+                <ion-label color="primary">Save Changes</ion-label>
+                <ion-icon slot="start" name="create" color="primary"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button fill="clear" expand="block" (click)="onDelete(TC.key)">
+                <ion-label color="danger">Delete</ion-label>
+                <ion-icon slot="start" name="trash" color="danger"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

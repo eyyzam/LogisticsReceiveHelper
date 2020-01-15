@@ -4,13 +4,15 @@ This is an Angular and Ionic App which helps to count products. Main concept of 
 
 App also features barcode generator and FirebaseAuth. Data is stored at firebase DB.
 
+## Application preview is available below (press Show full README.md file)
+
 ### Getting Started
 
 You need to fill these files in order for app to work
 * src/environment/environment.prod.ts OR src/environment/environment.ts 
 * functions/credential.json
 
-### You can quickly peek how the app looks here (images)
+### App screenshots
 
 Dashboard Preview          |  Options Menu             | Assignments Menu          | Sidenav
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
